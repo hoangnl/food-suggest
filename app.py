@@ -22,8 +22,6 @@ def hello():
     
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    if req.get("result").get("action") != "yahooWeatherForecast":
-        return {}
     baseurl = "https://query.yahooapis.com/v1/public/yql?"
     yql_query = makeYqlQuery()
     if yql_query is None:
