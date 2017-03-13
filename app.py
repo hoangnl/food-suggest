@@ -1,13 +1,17 @@
-import urllib2
-import urllib
+from __future__ import print_function
+from future.standard_library import install_aliases
+install_aliases()
+
+from urllib.parse import urlparse, urlencode
+from urllib.request import urlopen, Request
+from urllib.error import HTTPError
+
 import json
 import os
-import requests
 
 from flask import Flask
 from flask import request
 from flask import make_response
-from flask import render_template
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -18,20 +22,17 @@ def hello():
     
 @app.route('/webhook', methods=['POST'])
 def webhook():
+    if req.get("result").get("action") != "yahooWeatherForecast":
+        return {}
     baseurl = "https://query.yahooapis.com/v1/public/yql?"
     yql_query = makeYqlQuery()
     if yql_query is None:
         return {}
-    yql_url = baseurl + urllib.urlencode({'q': yql_query}) + "&format=json"
-    print (yql_url)
-    req = urllib2.Request(yql_url).add_header('User-Agent','Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0')
-    result = urllib2.urlopen(yql_url).read()
+    yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
+    result = urlopen(yql_url).read()
     data = json.loads(result)
     res = makeWebhookResult(data)
-    res = json.dumps(res, indent=4)
-    r = make_response(res)
-    r.headers['Content-Type'] = 'application/json'
-    return r
+    return res
 
 
 
