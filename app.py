@@ -12,6 +12,10 @@ from flask import render_template
 # Flask app should start in global layout
 app = Flask(__name__)
 
+@app.route('/', methods=['GET'])
+def hello():
+    return 'Hello world'
+    
 @app.route('/webhook', methods=['POST'])
 def webhook():
     baseurl = "https://query.yahooapis.com/v1/public/yql?"
