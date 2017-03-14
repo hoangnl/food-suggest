@@ -30,6 +30,8 @@ def webhook():
     result = urlopen(yql_url).read()
     data = json.loads(result)
     res = makeWebhookResult(data)
+    res = json.dumps(res, ensure_ascii=False).encode('utf8')
+    print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
