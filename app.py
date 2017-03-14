@@ -31,7 +31,6 @@ def webhook():
     data = json.loads(result)
     res = makeWebhookResult(data)
     res = json.dumps(res, ensure_ascii=False).encode('utf8')
-    print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
@@ -47,7 +46,6 @@ def makeWebhookResult(data):
     query = data.get('query')
     if query is None:
         return {}
-    print (query)
     
     result = query.get('results')
     if result is None:
@@ -56,7 +54,6 @@ def makeWebhookResult(data):
     a = result.get('a')
     if a is None:
         return {}
-    print (a.get('content'))
     speech = "Today you can try: " + a.get('content')
 
     return {
