@@ -20,7 +20,7 @@ app = Flask(__name__)
 def hello():
     return 'Hello world'
     
-@app.route('/webhook', methods=['POST'])
+@app.route('/webhook', methods=['POST', 'GET'])
 def webhook():
     baseurl = "https://query.yahooapis.com/v1/public/yql?"
     yql_query = makeYqlQuery()
@@ -54,6 +54,7 @@ def makeWebhookResult(data):
     a = result.get('a')
     if a is None:
         return {}
+    print (a.get('content'))
     speech = "Today you can try: " + a.get('content')
 
     return {
@@ -66,7 +67,7 @@ def makeWebhookResult(data):
 
 
 if __name__ == '__main__':
-    port = int(os.getenv('PORT', 5000))
+    port = int(os.getenv('PORT', 8000))
 
     print("Starting app on port %d" % port)
 
