@@ -35,7 +35,7 @@ def webhook():
     yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
     result = urlopen(yql_url).read()
     data = json.loads(result)
-    res = makeWebhookResult(data)
+    res = makeWebhookResult(randSource, data)
     res = json.dumps(res, ensure_ascii=False).encode('utf8')
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
@@ -59,7 +59,7 @@ def makeYqlQuery(randSource):
     return query
 
 
-def makeWebhookResult(data):
+def makeWebhookResult(randSource, data):
     query = data.get('query')
     if query is None:
         return {}
@@ -72,6 +72,8 @@ def makeWebhookResult(data):
     if a is None:
         return {}
     speech = a.get('title')
+    
+    
     if randSource == 0:
         url = "http://eva.vn/" + a.get('href')
     elif randSource == 1:
@@ -82,6 +84,7 @@ def makeWebhookResult(data):
         url = a.get('href')
     else:
         url = "http://kenh14.vn" + a.get('href')
+        
     facebook_message = {
         "attachment": {
             "type": "template",
