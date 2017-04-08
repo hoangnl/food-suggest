@@ -69,7 +69,7 @@ def makeWebhookResult(data):
     a = result.get('a')
     if a is None:
         return {}
-    speech = "Today you can try: " + a.get('content')
+    speech = "Bạn thử mấy món này xem: " + a.get('content')
 
     return {
         "speech": speech,
