@@ -41,7 +41,7 @@ def webhook():
 
 
 def makeYqlQuery():
-    randSource = randint(0,3)
+    randSource = randint(0,4)
     
     randPos = randint(1,6)
     if randSource == 0:
@@ -50,6 +50,8 @@ def makeYqlQuery():
         query = "select * from html where url=\"http://7monngonmoingay.net\" and xpath = \"/html/body/div[1]/div[2]/div[" + str(randPos) + "]/h2/a\""
     elif randSource == 2:
         query = "select * from html where url=\"http://www.phunutoday.vn/lam-me/\" and xpath =\"/html/body/main/div/div[1]/div[1]/div/section/div[1]/article[" + str(randPos) + "]/div/h3/a\""
+    elif randSource == 3:
+        query = "select * from html where url=\"https://naungonmoingay.com/mon-ngon/\" and xpath =\"/html/body/div[3]/div[1]/div[3]/article["+ str(randPos) + "]/h2/a\""
     else:
         query = "select * from html where url=\"http://kenh14.vn/made-by-me/kitchen.chn\" and xpath = \"/html/body/form/div[2]/div[2]/div[3]/div[2]/div/div/div[2]/div/div[3]/ul/li[" + str(randPos) + "]/div[2]/h3/a\""
     return query
