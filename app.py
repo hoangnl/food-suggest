@@ -79,21 +79,7 @@ def makeWebhookResult(data):
         "displayText": speech,
         # "data": data,
         # "contextOut": [],
-        "data" : {
-            "facebook" : {
-                "attachment" : {
-                    "type" : "template",
-                    "payload" : {
-                        "template_type" : "generic",
-                        "elements" : [ 
-                            {
-                                "image_url" : "https://www.vietnamonline.com/js/ckfinder/userfiles/images/Hanoi%20Flooding.jpg"
-                            }
-                            ]
-                        }
-                    }
-                }
-        },
+
         "source": "food-suggest"
     }
 
