@@ -76,6 +76,14 @@ def makeWebhookResult(data):
         "displayText": speech,
         # "data": data,
         # "contextOut": [],
+        "facebook": {
+            "attachment": {
+              "type": "file",
+              "payload": {
+                "url": "https://examples.api.ai/RichMessagesFiles/LoremIpsum.pdf"
+              }
+            }
+          },
         "source": "food-suggest"
     }
 
