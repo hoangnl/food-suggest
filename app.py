@@ -28,7 +28,7 @@ def hello():
 @app.route('/webhook', methods=['POST', 'GET'])
 def webhook():
     baseurl = "https://query.yahooapis.com/v1/public/yql?"
-    randSource = randint(0,8)
+    randSource = randint(0,7)
     yql_query = makeYqlQuery(randSource)
     if yql_query is None:
         return {}
@@ -79,7 +79,7 @@ def makeWebhookResult(randSource, data):
     
     
     if randSource == 0:
-        url = "http://eva.vn/" + a.get('href')
+        url = "http://eva.vn" + a.get('href')
     elif randSource == 1:
         url = a.get('href')
     elif randSource == 2:
