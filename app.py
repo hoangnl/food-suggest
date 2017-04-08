@@ -28,7 +28,8 @@ def hello():
 @app.route('/webhook', methods=['POST', 'GET'])
 def webhook():
     baseurl = "https://query.yahooapis.com/v1/public/yql?"
-    yql_query = makeYqlQuery()
+    randSource = randint(0,8)
+    yql_query = makeYqlQuery(randSource)
     if yql_query is None:
         return {}
     yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
@@ -43,9 +44,7 @@ def webhook():
 
 
 
-def makeYqlQuery():
-    randSource = randint(0,8)
-    
+def makeYqlQuery(randSource): 
     randPos = randint(1,6)
     if randSource == 0:
         query = "select * from html where url=\"http://eva.vn/bep-eva-c162.html\" and xpath =\"/html/body/div[2]/div[4]/table/tbody/tr[1]/td[2]/div/div[2]/div[1]/a\""
@@ -73,7 +72,16 @@ def makeWebhookResult(data):
     if a is None:
         return {}
     speech = a.get('title')
-
+    if randSource == 0:
+        url = "http://eva.vn/" + a.get('href')
+    elif randSource == 1:
+        url = a.get('href')
+    elif randSource == 2:
+        url = "http://www.phunutoday.vn"+ a.get('href')
+    elif randSource == 3:
+        url = a.get('href')
+    else:
+        url = "http://kenh14.vn" + a.get('href')
     facebook_message = {
         "attachment": {
             "type": "template",
@@ -87,8 +95,8 @@ def makeWebhookResult(data):
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": a.get('href'),
-                                "title": "View Details"
+                                "url": url,
+                                "title": "Xem"
                             }
                         ]
                     }
