@@ -51,7 +51,7 @@ def makeYqlQuery(randSource):
     elif randSource == 1:
         query = "select * from html where url=\"http://7monngonmoingay.net\" and xpath = \"/html/body/div[1]/div[2]/div[" + str(randPos) +"]/div[1]/a\""
     elif randSource == 2:
-        query = "select * from html where url=\"http://www.phunutoday.vn/lam-me/\" and xpath =\"/html/body/main/div/div[1]/div[1]/div/section/div[1]/article[" + str(randPos) +"]/a"
+        query = "select * from html where url=\"http://www.phunutoday.vn/lam-me/\" and xpath =\"/html/body/main/div/div[1]/div[1]/div/section/div[1]/article[" + str(randPos) +"]/a\""
     elif randSource == 3:
         query = "select * from html where url=\"https://naungonmoingay.com/mon-ngon/\" and xpath =\"/html/body/div[3]/div[1]/div[3]/article[" + str(randPos) +"]/div[1]/a\""
     elif randSource == 4:
@@ -69,16 +69,22 @@ def makeYqlQuery(randSource):
 
 def makeWebhookResult(randSource, data):
     query = data.get('query')
+    try_again = {
+        "speech": "Try again",
+        "displayText": "Try again",
+        "source": "food-suggest"
+    }
+
     if query is None:
-        return {}
+        return try_again
     
     result = query.get('results')
     if result is None:
-        return {}
+        return try_again
 
     a = result.get('a')
     if a is None:
-        return {}
+        return try_again
     speech = a.get('title')
     
     
