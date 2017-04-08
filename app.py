@@ -8,6 +8,8 @@ from urllib.error import HTTPError
 
 import json
 import os
+from random import randint
+
 
 from flask import Flask
 from flask import request
@@ -39,7 +41,14 @@ def webhook():
 
 
 def makeYqlQuery():
-    return "select * from html where url=\"http://eva.vn/bep-eva-c162.html\" and xpath =\"//*[@id='centerContent']/div[2]/div[1]/div[1]/h2/a\""
+    rand = randint(0,2)
+    if rand == 0:
+        query = "select * from html where url=\"http://eva.vn/bep-eva-c162.html\" and xpath =\"//*[@id='centerContent']/div[2]/div[1]/div[1]/h2/a\""
+    elif rand == 1:
+        query = "select * from html where url=\"http://eva.vn/bep-eva-c162.html\" and xpath =\"//*[@id='centerContent']/div[2]/div[1]/div[1]/h2/a\""
+    else:
+        query = "select * from html where url=\"http://eva.vn/bep-eva-c162.html\" and xpath =\"//*[@id='centerContent']/div[2]/div[1]/div[1]/h2/a\""
+    return query
 
 
 def makeWebhookResult(data):
