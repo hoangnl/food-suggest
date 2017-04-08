@@ -79,30 +79,21 @@ def makeWebhookResult(data):
         "displayText": speech,
         # "data": data,
         # "contextOut": [],
-        "messages": [
-                {
-                  "type": 0,
-                  "speech": "Tất nhiên là có rồi"
-                },
-                {
-                  "payload": {
-                    "facebook": {
-                      "attachment": {
-                        "type": "file",
-                        "payload": {
-                          "url": "https://examples.api.ai/RichMessagesFiles/LoremIpsum.pdf"
+        "data" : {
+            "facebook" : {
+                "attachment" : {
+                    "type" : "template",
+                    "payload" : {
+                        "template_type" : "generic",
+                        "elements" : [ 
+                            {
+                                "image_url" : "https://www.vietnamonline.com/js/ckfinder/userfiles/images/Hanoi%20Flooding.jpg"
+                            }
+                            ]
                         }
-                      }
                     }
-                  },
-                  "type": 4
-                },
-                {
-                  "imageUrl": "https://www.vietnamonline.com/js/ckfinder/userfiles/images/Hanoi%20Flooding.jpg",
-                  "type": 3
                 }
-              ]
-            },
+        },
         "source": "food-suggest"
     }
 
