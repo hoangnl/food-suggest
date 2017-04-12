@@ -28,7 +28,7 @@ def hello():
 @app.route('/webhook', methods=['POST', 'GET'])
 def webhook():
     baseurl = "https://query.yahooapis.com/v1/public/yql?"
-    randSource = randint(0,8)
+    randSource = randint(0,9)
     yql_query = makeYqlQuery(randSource)
     if yql_query is None:
         return {}
@@ -62,6 +62,8 @@ def makeYqlQuery(randSource):
         query = "select * from html where url=\"http://sotaynauan.com/chuyen-muc/mon-ngon-moi-ngay/\" and xpath = \"/html/body/div[2]/section/section/article[" + str(randPos) +"]/a\""
     elif randSource == 7:
         query = "select * from html where url=\"http://www.bepgiadinh.com/mon-ngon/\" and xpath = \"/html/body/div[1]/div/div/div[2]/div[1]/article/ul[" +  str(randint(3,8)) +"]/li[" +  str(randint(1,3)) +"]/a\""
+    elif randSource == 8:
+        query = "select * from html where url=\"http://feedy.vn/\" and xpath =\"/html/body/div[3]/div/div[2]/div[" +  str(randint(1,8)) +"]/div[1]/a\""
     else:
         query = "select * from html where url=\"http://kenh14.vn/made-by-me/kitchen.chn\" and xpath = \"/html/body/form/div[2]/div[2]/div[3]/div[2]/div/div/div[2]/div/div[3]/ul/li[" + str(randPos) +"]/div[1]/a\""
     return query
